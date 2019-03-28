@@ -51,8 +51,21 @@
 		// See 0-dataRead
 		messagesRef.on('value', function(snap){
 			let dataAsObj = snap.val();
-			tag.messages = Object.values(dataAsObj);
-			console.log("messages",tag.messages);
+		
+		
+			var tempData = [];
+
+			//instead of statically typing out the array value, we now read it in
+			//from the firebase data obj using a js for loop structure
+			for (key in dataAsObj) {
+				tempData.push(dataAsObj[key]);
+			}
+
+			//finally, we copy this array back to our tag's property field
+			// console.log("myMemes", tag.myMemes);
+			tag.messages = tempData;
+
+			//same question, 4th time of encounter. Why do we need to call tag update here?
 			tag.update();
 		});
 </app>
